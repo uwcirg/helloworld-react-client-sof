@@ -30,11 +30,11 @@ This project manages dependencies using the [NPM package manager](https://www.np
 ### Docker
 To start services via docker, first copy the default configuration file and modify as necessary:
 
-  cp .env.default .env
+    cp .env.default .env
 
 To start all services, run the below command:
-  docker-compose up
 
+    docker-compose up --detach
 
 ### Download Value Sets from VSAC
 The value set content used by the CQL is cached in a file named valueset-db.json, which has been checked into this project in an empty state. In order for the CDS to operate as intended, implementers must populate valueset-db.json with the value sets which have been published on the [Value Set Authority Center (VSAC)](https://vsac.nlm.nih.gov/). In order to access VSAC, you must sign up for a [UMLS Terminology Services account](https://uts.nlm.nih.gov//license.html).
