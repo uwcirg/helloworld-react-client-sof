@@ -4,7 +4,7 @@ WORKDIR /opt/node
 RUN chown node /opt/node
 USER node
 
-# cache hack, very fragile; only copy list of project dependencies
+# cache hack, very fragile; initially only copy list of project dependencies
 COPY --chown=node:node package.json package-lock.json ./
 
 # install node dependencies to parent directory of code
