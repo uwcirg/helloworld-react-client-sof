@@ -16,5 +16,4 @@ ENV PATH=/opt/node/node_modules/.bin/:$PATH
 COPY --chown=node:node . /opt/node/app
 WORKDIR /opt/node/app
 
-# create-react-app does not support relative imports (see issues/2)
-CMD ln --symbolic --force /opt/node/node_modules && npm start
+CMD ["npm", "start"]
