@@ -1,6 +1,8 @@
 # TODO update to newer version: Active LTS or Current
 FROM node:14
-WORKDIR /opt/app
+
+# TODO FIX
+WORKDIR /opt
 
 # cache hack; very fragile
 # only copy files `npm` needs to run
@@ -8,6 +10,9 @@ WORKDIR /opt/app
 COPY package.json package-lock.json ./
 RUN npm install
 
+ENV PATH=/opt/node_modules/.bin:$PATH
+
+WORKDIR /opt/app
 
 COPY . .
 
