@@ -4,10 +4,9 @@ WORKDIR /opt/node
 RUN chown node /opt/node
 USER node
 
-# cache hack; very fragile
-# only copy files `npm` needs to run
-# avoid build cache invalidation by changes in app code
-COPY package.json package-lock.json ./
+# cache hack, very fragile; only copy list of project dependencies
+COPY --chown=node:node package.json package-lock.json ./
+
 # install node dependencies to parent directory of code
 RUN npm install
 # add node modules binary folder to system PATH
