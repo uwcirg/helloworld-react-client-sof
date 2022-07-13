@@ -4,3 +4,5 @@ services:
   frontend:
     build:
       context: .
+    env_file:
+      - frontend.env

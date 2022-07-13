@@ -28,9 +28,13 @@ A number of options are available for local usage to support testing with synthe
 This project manages dependencies using the [NPM package manager](https://www.npmjs.com/) in the [Node environment](https://nodejs.dev/) (Node version <= 16 is recommended for this application). Make sure to have both NPM and Node installed before proceeding. The dependencies for the application can be installed locally by typing `npm install` at the command line. A local version of the app can be launched by typing `npm start` at the command line and the page will reload when you make changes. A copy suitable for distribution can be built using the `npm run build` command (see the `build` folder).
 
 ### Docker
-To start services via docker, first copy the default configuration file and modify as necessary:
+To start services via docker, first copy the default configuration files and modify as necessary:
 
+    # docker-compose service/project configuration
     cp .env.default .env
+
+    # React App configuration
+    cp frontend.env.default frontend.env
 
 To start all services, run the below command:
 
