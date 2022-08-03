@@ -27,7 +27,7 @@ export default function Launch() {
     })
       .then((result) => {
         if (!result.ok) {
-          throw Error(result.status);
+          throw new Error(result.status.toString());
         }
         return result.json();
       })
