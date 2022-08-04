@@ -3,12 +3,14 @@ import FHIR from 'fhirclient';
 import Box from '@mui/material/Box';
 import CircularProgress from '@mui/material/CircularProgress';
 import Error from './Error';
-import {queryPatientIdKey} from '../util/util.js';
+import { fetchEnvData, queryPatientIdKey } from "../util/util.js";
 import '../style/App.scss';
 
 export default function Launch() {
 
     const [error, setError] = React.useState('');
+
+    React.useEffect(() => fetchEnvData(), []);
 
     React.useEffect(() => {
         let authURL = 'launch-context.json';

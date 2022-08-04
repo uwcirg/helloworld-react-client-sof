@@ -4,11 +4,17 @@ import { FhirClientContext } from './FhirClientContext';
 import Box from '@mui/material/Box';
 import CircularProgress from '@mui/material/CircularProgress';
 import Error from './components/Error';
+import {fetchEnvData, getEnvs} from './util/util';
 
 export default function FhirClientProvider (props) {
 
     const [client, setClient] = React.useState(null);
     const [error, setError] = React.useState('');
+
+    React.useEffect(() => {
+      fetchEnvData();
+      console.log("environment variables ", getEnvs());
+    }, []);
 
     React.useEffect(() => {
         FHIR.oauth2.ready().then(
