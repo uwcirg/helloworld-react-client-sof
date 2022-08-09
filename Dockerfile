@@ -16,6 +16,7 @@ ENV PATH=/opt/node/node_modules/.bin/:$PATH
 COPY --chown=node:node . /opt/node/app
 WORKDIR /opt/node/app
 
+EXPOSE 3000
 CMD ["npm", "start"]
 
 
