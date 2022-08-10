@@ -2,9 +2,7 @@
 # https://docs.github.com/en/actions/publishing-packages/publishing-nodejs-packages
 ---
 name: Publish package to GitHub Packages
-on:
-  release:
-    types: [created]
+on: [push]
 jobs:
   build:
     runs-on: ubuntu-latest
