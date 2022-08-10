@@ -1,7 +1,6 @@
 {
   "name": "hello-world-react",
   "version": "0.1.0",
-  "private": true,
   "repository": {
     "type": "git",
     "url": "https://github.com/uwcirg/helloworld-react-client-sof.git"
