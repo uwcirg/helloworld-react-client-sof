@@ -2,6 +2,10 @@
   "name": "hello-world-react",
   "version": "0.1.0",
   "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/uwcirg/helloworld-react-client-sof.git"
+  },
   "dependencies": {
     "@emotion/react": "^11.9.3",
     "@emotion/styled": "^11.9.3",
