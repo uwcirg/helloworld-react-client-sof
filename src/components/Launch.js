@@ -41,16 +41,19 @@ export default function Launch() {
     console.log("Auth url ", authURL);
     fetchContextJson(authURL).then(json => {
        if (patientId) {
-         //only do this IF patient id comes from url queryString
+         // only do this IF patient id comes from url queryString
          json.patientId = patientId;
          sessionStorage.setItem(queryPatientIdKey, patientId);
        }
+       // allow client id to be configurable
        const envClientId = getEnv("REACT_APP_CLIENT_ID");
        if (envClientId) json.clientId = envClientId;
-       //allow auth scopes to be updated via environment variable
-       //see https://build.fhir.org/ig/HL7/smart-app-launch/scopes-and-launch-context.html
+
+       // allow auth scopes to be updated via environment variable
+       // see https://build.fhir.org/ig/HL7/smart-app-launch/scopes-and-launch-context.html
        const envAuthScopes = getEnv("REACT_APP_AUTH_SCOPES");
        if (envAuthScopes) json.scope = envAuthScopes;
+       
        console.log("launch context json ", json);
        FHIR.oauth2.authorize(json).catch((e) => {
          setError(e);
