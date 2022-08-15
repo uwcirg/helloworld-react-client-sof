@@ -76,13 +76,13 @@ export default function Launch() {
           setError(e);
         });
       },
-      (error) => setError(error)
+      (error) => setError(error.message)
     );
   }, []);
 
   return (
     <React.Fragment>
-      {error && <ErrorComponent message={error.message}></ErrorComponent>}
+      {error && <ErrorComponent message={error}></ErrorComponent>}
       {!error && (
         <Stack
           spacing={2}
