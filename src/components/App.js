@@ -15,7 +15,7 @@ export default function App() {
     <>
       {appReady && (
         <FhirClientProvider>
-          {<Summary></Summary>}
+          <Summary></Summary>
           {/* add other components as needed */}
         </FhirClientProvider>
       )}
