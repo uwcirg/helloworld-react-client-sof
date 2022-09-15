@@ -1,24 +1,15 @@
-import { useEffect, useState } from "react";
 import FhirClientProvider from "../FhirClientProvider";
 import Summary from "./Summary";
 import "../style/App.scss";
-import { fetchEnvData, getEnvs } from "../util/util.js";
+import {fetchEnvData, getEnvs} from "../util/util";
 
 export default function App() {
-  const [appReady, setAppReady] = useState(false);
-  useEffect(() => {
-    fetchEnvData();
-    setAppReady(true); // state change to make sure component is only rendered after environment variables are loaded
-    console.log("environment variables ", getEnvs());
-  }, []);
+  fetchEnvData(); // call this to load environment variables
+  console.log("environment variables ", getEnvs());
   return (
-    <>
-      {appReady && (
-        <FhirClientProvider>
-          <Summary />
-          {/* add other components as needed */}
-        </FhirClientProvider>
-      )}
-    </>
+    <FhirClientProvider>
+      <Summary />
+      {/* add other components as needed */}
+    </FhirClientProvider>
   );
 }
