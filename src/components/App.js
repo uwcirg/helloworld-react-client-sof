@@ -8,7 +8,7 @@ export default function App() {
   const [appReady, setAppReady] = useState(false);
   useEffect(() => {
     fetchEnvData();
-    setAppReady(true); // state change to make sure the environment variables are loaded
+    setAppReady(true); // state change to make sure component is only rendered after environment variables are loaded
     console.log("environment variables ", getEnvs());
   }, []);
   return (
