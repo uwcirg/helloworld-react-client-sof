@@ -2,7 +2,7 @@ import {Component} from "react";
 import FhirClientProvider from "../FhirClientProvider";
 import Summary from "./Summary";
 import "../style/App.scss";
-import { fetchEnvData, getEnvs} from "../util/util.js";
+import {fetchEnvData, getEnvs} from "../util/util.js";
 
 class App extends Component {
   componentWillMount() {
