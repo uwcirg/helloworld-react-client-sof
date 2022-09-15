@@ -1,8 +1,8 @@
-import {useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 import FhirClientProvider from "../FhirClientProvider";
 import Summary from "./Summary";
 import "../style/App.scss";
-import {fetchEnvData, getEnvs} from "../util/util.js";
+import { fetchEnvData, getEnvs } from "../util/util.js";
 
 export default function App() {
   const [appReady, setAppReady] = useState(false);
@@ -13,13 +13,12 @@ export default function App() {
   }, []);
   return (
     <>
-      {
-        appReady &&
+      {appReady && (
         <FhirClientProvider>
           {<Summary></Summary>}
           {/* add other components as needed */}
         </FhirClientProvider>
-      }
+      )}
     </>
   );
 }
