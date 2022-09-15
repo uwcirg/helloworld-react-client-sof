@@ -1,18 +1,22 @@
-import {useEffect} from 'react';
+import { Component} from "react";
 import FhirClientProvider from "../FhirClientProvider";
-import Summary from './Summary';
-import '../style/App.scss';
-import { fetchEnvData, getEnvs } from "../util/util.js";
+import Summary from "./Summary";
+import "../style/App.scss";
+import { fetchEnvData, getEnvs} from "../util/util.js";
 
-export default function App() {
-    useEffect(() => {
-        fetchEnvData();
-        console.log("environment variables ", getEnvs());
-    }, []);
+class App extends Component {
+  componentWillMount() {
+    fetchEnvData();
+    console.log("environment variables ", getEnvs());
+  }
+  render() {
     return (
-        <FhirClientProvider>
-            <Summary />
-            {/* add other components as needed */}
-        </FhirClientProvider>
+      <FhirClientProvider>
+        {<Summary></Summary>}
+        {/* add other components as needed */}
+      </FhirClientProvider>
     );
+  }
 }
+export default App;
+
