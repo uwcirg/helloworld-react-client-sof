@@ -73,7 +73,8 @@ export default function Launch() {
 
         console.log("launch context json ", json);
         FHIR.oauth2.authorize(json).catch((e) => {
-          setError(e);
+          console.log("FHIR auth error ", e);
+          setError("Fhir auth error. see console for detail.");
         });
       },
       (error) => setError(error.message)
