@@ -132,7 +132,7 @@ export default function Summary() {
           </div>
           <div>DOB: {patient.birthDate}</div>
           {/* example of an UI button, on clicking of which will go to the (f)EMR URL defined by an environment variable */}
-          {returnURL && <div><Button variant="contained" href={returnURL}>Return to Patient List</Button></div>}
+          {returnURL && <Button variant="contained" href={returnURL}>Return to Patient List</Button>}
         </Stack>
       )}
     </React.Fragment>
