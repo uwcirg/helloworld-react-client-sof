@@ -131,9 +131,13 @@ export default function Summary() {
             Name: {patient.name[0].given.join(" ") + patient.name[0].family}
           </div>
           <div>DOB: {patient.birthDate}</div>
-          {/* example of an UI button, on clicking of which will go to the (f)EMR URL defined by an environment variable */}
-          {returnURL && <Button variant="contained" href={returnURL}>Return to Patient List</Button>}
         </Stack>
+      )}
+      {/* example of an UI button, on clicking of which will go to the (f)EMR URL defined by an environment variable */}
+      {returnURL && (
+        <Button variant="contained" href={`${returnURL}/clear_session`}>
+          Return to Patient List
+        </Button>
       )}
     </React.Fragment>
   );
