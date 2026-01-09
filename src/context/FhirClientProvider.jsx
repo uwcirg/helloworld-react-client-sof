@@ -1,15 +1,27 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useReducer } from "react";
+import PropTypes from "prop-types";
 import FHIR from "fhirclient";
+import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
 import CircularProgress from "@mui/material/CircularProgress";
+import { queryPatientIdKey } from "@consts";
+import ErrorComponent from "@components/ErrorComponent";
+import { getEnv } from "@util";
 import { FhirClientContext } from "./FhirClientContext";
-import { queryPatientIdKey } from "./util/util";
-import ErrorComponent from "./components/ErrorComponent";
 
 export default function FhirClientProvider(props) {
-  const [client, setClient] = useState(null);
-  const [patient, setPatient] = useState(null);
-  const [error, setError] = useState(null);
+  const reducer = (state, action) => {
+    return {
+      ...state,
+      ...action,
+    };
+  };
+
+  const [state, dispatch] = useReducer(reducer, {
+    client: null,
+    patient: null,
+    error: null,
+  });
 
   const getPatient = async (client) => {
     if (!client) return;
@@ -24,38 +36,63 @@ export default function FhirClientProvider(props) {
     return await client.patient.read();
   };
 
+  const renderReturnButton = () => {
+    const returnURL = getEnv("REACT_APP_DASHBOARD_URL");
+    if (!returnURL) return null;
+    return (
+      <Button
+        color="primary"
+        href={returnURL + "/clear_session"}
+        variant="contained"
+        sx={{
+          marginTop: 2,
+          marginLeft: 2,
+        }}
+      >
+        Back to Patient List
+      </Button>
+    );
+  };
+
   useEffect(() => {
     FHIR.oauth2.ready().then(
       (client) => {
         console.log("Auth complete, client ready.");
-        setClient(client);
         getPatient(client)
-            .then((result) => {
-              console.log("Patient loaded.");
-              setPatient(result);
-              setError(null);
-            })
-            .catch((e) => {
-              setError(e);
+          .then((result) => {
+            console.log("Patient loaded.");
+            dispatch({
+              client: client,
+              patient: result,
             });
+          })
+          .catch((e) => {
+            dispatch({
+              error: e,
+            });
+          });
       },
       (error) => {
         console.log("Auth error: ", error);
-        setError(error);
-      }
+        dispatch({
+          error: error,
+        });
+      },
     );
   }, []);
 
-
   return (
-    <FhirClientContext.Provider
-      value={{ client: client, patient: patient, error: error } || {}}
-    >
+    <FhirClientContext.Provider value={state}>
       <FhirClientContext.Consumer>
-        {({ client, error }) => {
+        {({ client, patient, error }) => {
           // any auth error that may have been rejected with
           if (error) {
-            return <ErrorComponent message={error.message}></ErrorComponent>;
+            return (
+              <>
+                <ErrorComponent message={error.message}></ErrorComponent>
+                {renderReturnButton()}
+              </>
+            );
           }
 
           // if client and patient are available render the children component(s)
@@ -75,3 +112,7 @@ export default function FhirClientProvider(props) {
     </FhirClientContext.Provider>
   );
 }
+
+FhirClientProvider.propTypes = {
+  children: PropTypes.oneOfType([PropTypes.element, PropTypes.array]),
+};
