@@ -19,19 +19,6 @@ export default function PatientInfo(props) {
   const getPatientAge = () => {
     return patientObj.age ?? "--";
   };
-  const renderMRN = () => {
-    if (!patientObj.mrn) return "--";
-    return (
-      <Box>
-        <Typography component="span" sx={{ color: "muted.main", marginLeft: "2px" }} variant="body2">
-          MRN:{" "}
-        </Typography>
-        <Typography component="span" variant="body2">
-          {patientObj.mrn}
-        </Typography>
-      </Box>
-    );
-  };
   const renderDOB = () => (
     <Box>
       <Typography component="span" sx={{ color: "muted.main" }} variant="body2">
@@ -65,7 +52,6 @@ export default function PatientInfo(props) {
         <Typography component="span" className="patient-name" sx={{ fontWeight: 500 }}>
           {getPatientName()}
         </Typography>
-        {renderMRN()}
       </Stack>
       <Stack spacing={1} direction="row" alignItems="center" className="patient-dob-container">
         {renderDOB()}
