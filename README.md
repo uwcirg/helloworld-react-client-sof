@@ -1,7 +1,7 @@
 # Hello World SoF App in React
 
-This application was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+This application was bootstrapped with [Vite](https://vite.dev/).
+You can learn more in the [Vite documentation](https://vite.dev/guide/).
 To learn React, check out the [React documentation](https://reactjs.org/).
 The app can be launched via the [SMART<sup>&reg;</sup> app launch framework](http://hl7.org/fhir/smart-app-launch/index.html).
 
@@ -15,7 +15,7 @@ The app can be launched via the [SMART<sup>&reg;</sup> app launch framework](htt
 A number of options are available for local usage to support testing with synthetic data.
 
 ### Setup
-This project manages dependencies using the [NPM package manager](https://www.npmjs.com/) in the [Node environment](https://nodejs.dev/) (Node version <= 16 is recommended for this application). Make sure to have both NPM and Node installed before proceeding. The dependencies for the application can be installed locally by typing `npm install` at the command line. A local version of the app can be launched by typing `npm start` at the command line and the page will reload when you make changes. A copy suitable for distribution can be built using the `npm run build` command (see the `build` folder).
+This project manages dependencies using the [NPM package manager](https://www.npmjs.com/) in the [Node environment](https://nodejs.dev/) (Node version >= 20 is recommended for this application). Make sure to have both NPM and Node installed before proceeding. The dependencies for the application can be installed locally by typing `npm install` at the command line. A local version of the app can be launched by typing `npm start` at the command line and the page will reload when you make changes. A copy suitable for distribution can be built using the `npm run build` command (see the `build` folder).
 
 ### Docker
 To start services via docker, first copy the default configuration files and modify as necessary:
@@ -36,8 +36,6 @@ Parameters for the app are stored in [environmental variables](http://man7.org/l
 #### Parameters
 | Parameter | Description | Allowed Values |
 | --- | --- | --- |
-| `REACT_APP_FHIR_RESOURCES` | Define the FHIR resource(s) to load for the patient | `Condition,Procedure,Observation,Questionnaire,QuestionnaireResponse` |
-| `REACT_APP_FHIR_OBSERVATION_CATEGORIES` | Define what categor(ies) of FHIR observations to load for the patient | `social-history,vital-signs,imaging,laboratory,procedure,survey,exam,therapy,activity` |
 | `REACT_APP_AUTH_SCOPES` | For allowing the app to specify the delegation of a specific set of access rights via launch context. see [App Launch: Scopes and Launch Context](https://build.fhir.org/ig/HL7/smart-app-launch/scopes-and-launch-context.html) | `profile roles email patient/*.read openid fhirUser patient/QuestionnaireResponse.write` |
 | `REACT_APP_DASHBOARD_URL` | Define the (f)EMR URL to which the app can return to | example: https://dashboard.acc.dev.cosri.cirg.washington.edu
 
