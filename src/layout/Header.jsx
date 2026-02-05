@@ -41,7 +41,7 @@ export default function Header(props) {
     }
     e.target.classList.remove("ghost");
   };
-  const shouldHideReturnButton = () => !returnURL || inEHR;
+  const shouldHideReturnButton = () => !returnURL;
 
   const renderTitle = () => {
     const appTitle = getEnvAppTitle();
