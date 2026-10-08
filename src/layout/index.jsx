@@ -36,7 +36,7 @@ export default function Index({ children }) {
   }, [ready]);
   if (!ready)
     return (
-      <Stack spacing={2} direction="row" style={{ padding: "24px" }} alignItems="center">
+      <Stack spacing={2} direction="row" style={{ padding: "24px", alignItems: "center" }}>
         <CircularProgress></CircularProgress>
         <Typography variant="body1">Loading environment variables ...</Typography>
       </Stack>
@@ -44,10 +44,10 @@ export default function Index({ children }) {
   return (
     <ErrorBoundary FallbackComponent={ErrorFallBack}>
       <ThemeProvider theme={theme}>
-          <FhirClientProvider>
-            <CssBaseline />
-              <Base>{children}</Base>
-          </FhirClientProvider>
+        <FhirClientProvider>
+          <CssBaseline />
+          <Base>{children}</Base>
+        </FhirClientProvider>
       </ThemeProvider>
     </ErrorBoundary>
   );

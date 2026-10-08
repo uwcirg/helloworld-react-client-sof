@@ -177,12 +177,11 @@ export default function Header(props) {
               sm: 1,
               md: 1.25,
             }}
-            alignItems="center"
-            sx={{ width: "100%" }}
+            sx={{ width: "100%", alignItems: "center" }}
           >
             {renderLogo()}
             {renderTitle()}
-            <Stack direction={"row"} sx={{ flex: "1 1" }} alignItems="center">
+            <Stack direction={"row"} sx={{ flex: "1 1", alignItems: "center" }}>
               {!inEHR && renderPatientInfo()}
               {!shouldHideReturnButton && renderReturnButton()}
             </Stack>

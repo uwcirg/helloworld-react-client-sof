@@ -1,4 +1,4 @@
-import FHIR from "fhirclient";
+import FHIR from "fhirclient/browser";
 import { queryNeedPatientBanner, queryPatientIdKey } from "@consts";
 import { fetchEnvData, getEnv } from "@util";
 

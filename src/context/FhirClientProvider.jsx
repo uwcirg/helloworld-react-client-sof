@@ -1,6 +1,6 @@
-import React, { useEffect, useReducer } from "react";
+import React, { useEffect, useReducer, useRef } from "react";
 import PropTypes from "prop-types";
-import FHIR from "fhirclient";
+import FHIR from "fhirclient/browser";
 import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
 import CircularProgress from "@mui/material/CircularProgress";
@@ -54,7 +54,11 @@ export default function FhirClientProvider(props) {
     );
   };
 
+  const started = useRef(false);
+
   useEffect(() => {
+    if (started.current) return;
+    started.current = true;
     FHIR.oauth2.ready().then(
       (client) => {
         console.log("Auth complete, client ready.");
@@ -81,35 +85,24 @@ export default function FhirClientProvider(props) {
     );
   }, []);
 
+  const { client, patient, error } = state;
+
   return (
-    <FhirClientContext.Provider value={state}>
-      <FhirClientContext.Consumer>
-        {({ client, patient, error }) => {
-          // any auth error that may have been rejected with
-          if (error) {
-            return (
-              <>
-                <ErrorComponent message={error.message}></ErrorComponent>
-                {renderReturnButton()}
-              </>
-            );
-          }
-
-          // if client and patient are available render the children component(s)
-          if (client && patient) {
-            return props.children;
-          }
-
-          // client is undefined until auth.ready() is fulfilled
-          return (
-            <Stack spacing={2} direction="row" style={{ padding: "24px" }}>
-              <CircularProgress></CircularProgress>
-              <div>Authorizing...</div>
-            </Stack>
-          );
-        }}
-      </FhirClientContext.Consumer>
-    </FhirClientContext.Provider>
+    <FhirClientContext value={state}>
+      {error ? (
+        <>
+          <ErrorComponent message={error.message} />
+          {renderReturnButton()}
+        </>
+      ) : client && patient ? (
+        props.children
+      ) : (
+        <Stack spacing={2} direction="row" style={{ padding: "24px" }}>
+          <CircularProgress />
+          <div>Authorizing...</div>
+        </Stack>
+      )}
+    </FhirClientContext>
   );
 }
 
